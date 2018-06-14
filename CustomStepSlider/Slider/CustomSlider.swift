@@ -43,7 +43,7 @@ class CustomSlider: UIViewController
         self.configureSliderValues()
         self.createSteps()
 
-        slider!.setThumbImage(UIImage(named: "slider_selector@2x.png"), forState:UIControlState.Normal)
+        slider!.setThumbImage(UIImage(named: "slider_selector@2x.png"), for:UIControlState.normal)
     }
     
     
@@ -64,28 +64,27 @@ class CustomSlider: UIViewController
         slider!.value = Float(numSteps) - 1.0
         
         self.slider?.tintColor = SliderConstants.kSLIDER_COLOR
-        self.slider?.addTarget(self, action: "sliderValueChanged", forControlEvents: UIControlEvents.TouchUpInside)
+        self.slider?.addTarget(self, action: #selector(CustomSlider.sliderValueChanged), for: UIControlEvents.touchUpInside)
     }
     
     func createSteps()
     {
-        stepsView?.frame.size = CGSizeMake(UIScreen.mainScreen().bounds.size.width, SliderConstants.kSLIDER_HEIGHT)
+        stepsView?.frame.size = CGSize(width: UIScreen.main.bounds.size.width, height: SliderConstants.kSLIDER_HEIGHT)
     
         for step in steps {
-            self.createLabelForStep(step as! String)
+            self.createLabelForStep(step: step as! String)
         }
     }
     
     func createLabelForStep(step: String)
     {
-        let index = steps.indexOfObject(step)
-        let labelWidth = (stepsView!.frame.size.width - (SliderConstants.kSLIDER_MARGIN*2))/CGFloat(numSteps)
-    
-        let label = UILabel(frame: CGRectMake(labelWidth*CGFloat(index) + SliderConstants.kSLIDER_MARGIN, SliderConstants.kY_STEPS, labelWidth, 21))
+        let index = steps.index(of: step)
+        let labelWidth = (stepsView!.frame.size.width - (SliderConstants.kSLIDER_MARGIN*2))/CGFloat(numSteps)    
+        let label = UILabel(frame: CGRect(origin: CGPoint(x: labelWidth*CGFloat(index) + SliderConstants.kSLIDER_MARGIN, y: SliderConstants.kY_STEPS), size: CGSize(width: labelWidth, height: 21)))
         label.font = UIFont(name: "Helvetica", size: 14)
-        label.textColor = UIColor.blackColor()
+        label.textColor = UIColor.black
         label.text = step
-        label.textAlignment = NSTextAlignment.Center
+        label.textAlignment = NSTextAlignment.center
         
         stepsView!.addSubview(label)
     }
