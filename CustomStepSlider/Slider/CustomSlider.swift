@@ -79,7 +79,7 @@ class CustomSlider: UIViewController
     func createLabelForStep(step: String)
     {
         let index = steps.index(of: step)
-        let labelWidth = (stepsView!.frame.size.width - (SliderConstants.kSLIDER_MARGIN*2))/CGFloat(numSteps)    
+        let labelWidth = (stepsView!.frame.size.width - (SliderConstants.kSLIDER_MARGIN*2))/CGFloat(numSteps)
         let label = UILabel(frame: CGRect(origin: CGPoint(x: labelWidth*CGFloat(index) + SliderConstants.kSLIDER_MARGIN, y: SliderConstants.kY_STEPS), size: CGSize(width: labelWidth, height: 21)))
         label.font = UIFont(name: "Helvetica", size: 14)
         label.textColor = UIColor.black
