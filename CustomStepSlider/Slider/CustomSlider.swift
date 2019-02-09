@@ -40,10 +40,10 @@ class CustomSlider: UIViewController
     {
         super.viewDidLoad()
 
-        self.configureSliderValues()
-        self.createSteps()
+        configureSliderValues()
+        createSteps()
 
-        slider!.setThumbImage(UIImage(named: "slider_selector@2x.png"), for:UIControlState.normal)
+        slider!.setThumbImage(UIImage(named: "slider_selector@2x.png"), for:UIControl.State.normal)
     }
     
     
@@ -57,26 +57,26 @@ class CustomSlider: UIViewController
     
     //MARK UI Methods
     
-    func configureSliderValues()
+    private func configureSliderValues()
     {
         slider!.minimumValue = 1
         slider!.maximumValue = Float(numSteps)
         slider!.value = Float(numSteps) - 1.0
         
-        self.slider?.tintColor = SliderConstants.kSLIDER_COLOR
-        self.slider?.addTarget(self, action: #selector(CustomSlider.sliderValueChanged), for: UIControlEvents.touchUpInside)
+        slider?.tintColor = SliderConstants.kSLIDER_COLOR
+        slider?.addTarget(self, action: #selector(CustomSlider.sliderValueChanged), for: UIControl.Event.touchUpInside)
     }
     
-    func createSteps()
+    private func createSteps()
     {
         stepsView?.frame.size = CGSize(width: UIScreen.main.bounds.size.width, height: SliderConstants.kSLIDER_HEIGHT)
     
         for step in steps {
-            self.createLabelForStep(step: step as! String)
+            createLabelForStep(step: step as! String)
         }
     }
     
-    func createLabelForStep(step: String)
+    private func createLabelForStep(step: String)
     {
         let index = steps.index(of: step)
         let labelWidth = (stepsView!.frame.size.width - (SliderConstants.kSLIDER_MARGIN*2))/CGFloat(numSteps)
