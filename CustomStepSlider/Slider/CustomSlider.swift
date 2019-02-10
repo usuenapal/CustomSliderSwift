@@ -8,79 +8,117 @@
 
 import UIKit
 
-struct SliderConstants {
-    static let kSLIDER_HEIGHT = CGFloat(55)
-    static let kSLIDER_MARGIN = CGFloat(0)
-    static let kY_STEPS = CGFloat(28)
-    static let kSLIDER_COLOR = UIColor(red: 0.59, green: 0.78, blue: 0.28, alpha: 0.9)
+protocol CustomSliderDelegate {
+    func sliderValueChanged(value: Float)
 }
 
-class CustomSlider: UIViewController
+struct SliderConstants {
+    static let kStespHeight = CGFloat(30)
+    static let kSliderHeight = CGFloat(55)
+    static let kSliderMargin = CGFloat(0)
+    static let kYSteps = CGFloat(28)
+    static let kSliderColor = UIColor(red: 0.59, green: 0.78, blue: 0.28, alpha: 0.9)
+}
+
+class CustomSlider: UIView
 {
-    @IBOutlet weak var slider: UISlider?
-    @IBOutlet weak var stepsView: UIView?
+    @IBOutlet var sliderHeight: NSLayoutConstraint?
     
-    var numSteps = 0
-    var steps: NSArray
+    private var delegate: CustomSliderDelegate?
+    private var slider: UISlider?
+    private var stepsView: UIView?
     
-    init(steps: NSArray)
+    private var numSteps = 0
+    private var steps: NSArray
+    private var thumbName: String = "slider_selector@2x.png"
+    
+    //MARK - Public Methods
+    
+    func setDelegate(delegate: CustomSliderDelegate)
+    {
+        self.delegate = delegate
+    }
+    
+    func setSteps(steps: NSArray)
     {
         self.steps = steps
         self.numSteps = steps.count
         
-        super.init(nibName: nil, bundle: nil)
+        initUIElements()
     }
+    
+    func setThumbImage(imageName: String)
+    {
+        thumbName = imageName
+        slider?.setThumbImage(UIImage(named: thumbName), for:UIControl.State.normal)
+    }
+    
+    
+    //MARK - Initializers
     
     required init?(coder aDecoder: NSCoder)
     {
-        fatalError("init(coder:) has not been implemented")
+        steps = NSArray()
+        super.init(coder: aDecoder)
     }
     
-    override func viewDidLoad()
+    override func awakeFromNib()
     {
-        super.viewDidLoad()
-
-        self.configureSliderValues()
-        self.createSteps()
-
-        slider!.setThumbImage(UIImage(named: "slider_selector@2x.png"), for:UIControlState.normal)
+        super.awakeFromNib()
     }
     
     
     //MARK Functionality Methods
     
-    @IBAction func sliderValueChanged()
+    @objc func sliderValueChanged()
     {
-        slider!.setValue(round(slider!.value), animated: false)
+        slider!.value = Float(lroundf(slider!.value))
+        
+        if delegate != nil {
+            delegate?.sliderValueChanged(value: slider!.value)
+        }
     }
     
     
     //MARK UI Methods
     
-    func configureSliderValues()
+    private func initUIElements()
+    {
+        slider = UISlider(frame: CGRect(x: 0, y: 0, width: frame.size.width, height: SliderConstants.kSliderHeight))
+        stepsView = UIView(frame: CGRect(x: 0, y: SliderConstants.kSliderHeight, width: frame.size.width, height: SliderConstants.kStespHeight))
+        
+        addSubview(slider!)
+        configureSliderValues()
+        
+        addSubview(stepsView!)
+        createSteps()
+        
+        sliderHeight?.constant = SliderConstants.kSliderHeight + SliderConstants.kStespHeight
+    }
+    
+    private func configureSliderValues()
     {
         slider!.minimumValue = 1
         slider!.maximumValue = Float(numSteps)
         slider!.value = Float(numSteps) - 1.0
         
-        self.slider?.tintColor = SliderConstants.kSLIDER_COLOR
-        self.slider?.addTarget(self, action: #selector(CustomSlider.sliderValueChanged), for: UIControlEvents.touchUpInside)
+        slider?.tintColor = SliderConstants.kSliderColor
+        slider?.addTarget(self, action: #selector(CustomSlider.sliderValueChanged), for: UIControl.Event.touchUpInside)
+        slider!.setThumbImage(UIImage(named: thumbName), for:UIControl.State.normal)
     }
     
-    func createSteps()
+    private func createSteps()
     {
-        stepsView?.frame.size = CGSize(width: UIScreen.main.bounds.size.width, height: SliderConstants.kSLIDER_HEIGHT)
-    
         for step in steps {
-            self.createLabelForStep(step: step as! String)
+            createLabelForStep(step: step as! String)
         }
     }
     
-    func createLabelForStep(step: String)
+    private func createLabelForStep(step: String)
     {
         let index = steps.index(of: step)
-        let labelWidth = (stepsView!.frame.size.width - (SliderConstants.kSLIDER_MARGIN*2))/CGFloat(numSteps)
-        let label = UILabel(frame: CGRect(origin: CGPoint(x: labelWidth*CGFloat(index) + SliderConstants.kSLIDER_MARGIN, y: SliderConstants.kY_STEPS), size: CGSize(width: labelWidth, height: 21)))
+        let labelWidth = (stepsView!.frame.size.width - (SliderConstants.kSliderMargin*2))/CGFloat(numSteps)
+        let label = UILabel(frame: CGRect(origin: CGPoint(x: labelWidth*CGFloat(index) + SliderConstants.kSliderMargin, y: 0), size: CGSize(width: labelWidth, height: 21)))
         label.font = UIFont(name: "Helvetica", size: 14)
         label.textColor = UIColor.black
         label.text = step

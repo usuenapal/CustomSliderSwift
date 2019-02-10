@@ -1,49 +1,83 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ViewController" customModule="CustomStepSlider" customModuleProvider="target">
             <connections>
-                <outlet property="slider" destination="Pdp-3v-sdv" id="aPZ-cn-yta"/>
-                <outlet property="stepsView" destination="Ugt-yt-Ois" id="hZj-uJ-fm2"/>
+                <outlet property="slider" destination="Ugt-yt-Ois" id="Azg-e3-Epe"/>
+                <outlet property="slider2" destination="g4I-bP-4mT" id="Zyv-OS-70e"/>
                 <outlet property="view" destination="iN0-l3-epB" id="IUk-do-vFc"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Custom Slider" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="fPA-hx-9Pb">
-                    <rect key="frame" x="28" y="89" width="265" height="35"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Custom Slider" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fPA-hx-9Pb">
+                    <rect key="frame" x="28" y="90" width="319" height="35"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="35" id="gMa-fn-8DW"/>
+                    </constraints>
                     <fontDescription key="fontDescription" name="AmericanTypewriter" family="American Typewriter" pointSize="30"/>
-                    <color key="textColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="textColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Configure your own selection steps" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="tNZ-eD-9hK" userLabel="Info">
-                    <rect key="frame" x="39" y="296" width="265" height="51"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ugt-yt-Ois" userLabel="StepsView - 1" customClass="CustomSlider" customModule="CustomStepSlider" customModuleProvider="target">
+                    <rect key="frame" x="28" y="142" width="319" height="5"/>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="5" id="eOl-qq-ACx"/>
+                    </constraints>
+                    <connections>
+                        <outlet property="sliderHeight" destination="eOl-qq-ACx" id="yZl-g0-HFH"/>
+                    </connections>
+                </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="How was your day?" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tNZ-eD-9hK" userLabel="Info">
+                    <rect key="frame" x="29" y="187" width="318" height="51"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="51" id="W6Z-Y9-bsj"/>
+                    </constraints>
                     <fontDescription key="fontDescription" name="AmericanTypewriter" family="American Typewriter" pointSize="18"/>
-                    <color key="textColor" red="0.14455955615942029" green="0.40339107789855072" blue="0.59890172101449279" alpha="0.91000000000000003" colorSpace="calibratedRGB"/>
+                    <color key="textColor" red="0.14455955615942029" green="0.40339107789855072" blue="0.59890172101449279" alpha="0.91000000000000003" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" id="Pdp-3v-sdv">
-                    <rect key="frame" x="13" y="152" width="293" height="31"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                </slider>
-                <view clipsSubviews="YES" contentMode="scaleToFill" id="Ugt-yt-Ois" userLabel="StepsView">
-                    <rect key="frame" x="0.0" y="181" width="320" height="55"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g4I-bP-4mT" userLabel="StepsView - 2" customClass="CustomSlider" customModule="CustomStepSlider" customModuleProvider="target">
+                    <rect key="frame" x="28" y="246" width="319" height="21"/>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="21" id="nyj-7g-6Ek"/>
+                    </constraints>
+                    <connections>
+                        <outlet property="sliderHeight" destination="nyj-7g-6Ek" id="qeR-3L-Y5d"/>
+                    </connections>
                 </view>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-            <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="288" y="118"/>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="fPA-hx-9Pb" firstAttribute="leading" secondItem="PD7-cf-sUw" secondAttribute="leading" constant="28" id="0aI-3a-Oap"/>
+                <constraint firstItem="tNZ-eD-9hK" firstAttribute="leading" secondItem="PD7-cf-sUw" secondAttribute="leading" constant="29" id="3I0-Wu-hhS"/>
+                <constraint firstItem="tNZ-eD-9hK" firstAttribute="top" secondItem="Ugt-yt-Ois" secondAttribute="bottom" constant="40" id="94m-f8-soa"/>
+                <constraint firstItem="Ugt-yt-Ois" firstAttribute="top" secondItem="fPA-hx-9Pb" secondAttribute="bottom" constant="17" id="FMF-EN-HCr"/>
+                <constraint firstItem="PD7-cf-sUw" firstAttribute="trailing" secondItem="g4I-bP-4mT" secondAttribute="trailing" constant="28" id="GAL-uD-pwV"/>
+                <constraint firstItem="Ugt-yt-Ois" firstAttribute="leading" secondItem="PD7-cf-sUw" secondAttribute="leading" constant="28" id="GS9-Kz-nVm"/>
+                <constraint firstItem="PD7-cf-sUw" firstAttribute="trailing" secondItem="Ugt-yt-Ois" secondAttribute="trailing" constant="28" id="HjS-Wf-hId"/>
+                <constraint firstItem="g4I-bP-4mT" firstAttribute="top" secondItem="tNZ-eD-9hK" secondAttribute="bottom" constant="8" id="R16-Sl-ycp"/>
+                <constraint firstItem="PD7-cf-sUw" firstAttribute="trailing" secondItem="fPA-hx-9Pb" secondAttribute="trailing" constant="28" id="Vb7-fo-ccN"/>
+                <constraint firstItem="PD7-cf-sUw" firstAttribute="trailing" secondItem="tNZ-eD-9hK" secondAttribute="trailing" constant="28" id="W3s-nm-D0t"/>
+                <constraint firstItem="fPA-hx-9Pb" firstAttribute="top" secondItem="PD7-cf-sUw" secondAttribute="top" constant="70" id="tub-9W-Sa5"/>
+                <constraint firstItem="g4I-bP-4mT" firstAttribute="leading" secondItem="PD7-cf-sUw" secondAttribute="leading" constant="28" id="uz4-xm-weU"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="PD7-cf-sUw"/>
+            <point key="canvasLocation" x="-133.59999999999999" y="106.59670164917542"/>
         </view>
     </objects>
 </document>
